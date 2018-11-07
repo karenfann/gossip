@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>
+          <h1 className="bounce">
             <i>gossip.</i>
           </h1>
         </header>
