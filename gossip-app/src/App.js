@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import firebase from "firebase/app";
 
@@ -17,9 +16,8 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h1>
-            gossip
+            <i>gossip.</i>
           </h1>
         </header>
       </div>
