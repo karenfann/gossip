@@ -9,9 +9,6 @@ WORKDIR /app
 
 # copy our package.json and package locks files, and install node modules
 COPY package*.json ./
-RUN npm install --loglevel=error
-
-# copy everything else and run it
-COPY . .
+RUN npm install --loglevel=error --ignore-optional
 
 ENTRYPOINT ["npm", "run", "dev"]
