@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  frontend:
+    image: karenfann/gossip-frontend
+    build:
+      context: ./gossip-frontend
+    ports:
+      - 8080:8080
+    volumes:
+      - ./gossip-frontend:/app:rw
+      - /app/node_modules
+

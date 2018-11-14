@@ -1,0 +1,43 @@
+{
+  "name": "gossip-frontend",
+  "version": "1.0.0",
+  "description": "Talk and share thoughts with anonymous strangers around you for fun",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --env.development --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karenfann/gossip.git"
+  },
+  "author": "Karen Fann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karenfann/gossip/issues"
+  },
+  "homepage": "https://github.com/karenfann/gossip#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "css-loader": "^1.0.1",
+    "file-loader": "^2.0.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.4",
+    "node-sass": "^4.10.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "dependencies": {
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
+    "react-router-dom": "^4.3.1"
+  }
+}
