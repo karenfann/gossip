@@ -9,3 +9,9 @@
 
 `make down`
 * kills the docker-compose network
+
+## Installing a new Node Module
+* install the module locally `npm i -S <module>`
+* run `make down` to stop docker
+* run `make build` to rebuild the docker image with new node module
+* run `make run`
