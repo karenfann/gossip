@@ -1,0 +1,49 @@
+.post {
+    background-color: white;
+    padding: 20px 40px;
+    text-align: left;
+    margin: 5px 0;
+}
+
+.post-footer {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    height: 40px;
+
+    button {
+        border-color: transparent;
+        cursor: pointer;
+    }
+}
+
+.post-react {
+    float: left;
+}
+
+.react-like,.react-dislike {
+    font-size: 18px;
+    &:focus {
+        outline: none;
+    }
+}
+
+.post-header {
+    height: 50px;
+}
+
+.post-timestamp-wrapper {
+    float: left;
+}
+
+.post-distance-wrapper {
+    float: right;
+}
+
+.post-comment-toggle {
+    float: right;
+
+    &:hover {
+        cursor: pointer;
+        color: pink;
+    }
+}
