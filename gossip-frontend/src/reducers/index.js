@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import createHistory from 'history/createBrowserHistory';
 import thunk from 'redux-thunk';
+import { createLogger } from 'redux-logger'
 
 import User from './user'
 
@@ -9,7 +10,10 @@ const store = createStore(
         User
     }),
     applyMiddleware(
-        thunk 
+      thunk,
+        createLogger({
+            collapsed: true
+        })
     )
 );
 

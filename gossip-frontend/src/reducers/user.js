@@ -30,7 +30,7 @@ const User = (state=initialState, action) => {
                     loading: false
                 },
                 location: {
-                    latitude: action.position.latidude,
+                    latitude: action.position.latitude,
                     longitude: action.position.longitude
                 }
             }
