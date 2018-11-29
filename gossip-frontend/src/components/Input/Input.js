@@ -9,7 +9,7 @@ class Input extends React.Component {
             <div className="input-wrapper">
                 <button className="form-button" type="button">submit</button>
                 <div className="form-input-wrapper">
-                    <input className="form-input" placeholder="hello" />
+                    <input className="form-input" placeholder="spill the tea" />
                 </div>
             </div>
         );

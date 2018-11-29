@@ -6,7 +6,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #df889d;
+  background: linear-gradient(#df889d, #eccad2);
+  margin: 0 25% 5% 25%;
 }
 
 code {
@@ -16,7 +17,6 @@ code {
 
 .App {
   text-align: center;
-  margin: 0 25% 10% 25%;
 }
 
 .App-logo {
@@ -31,6 +31,7 @@ code {
   align-items: center;
   justify-content: center;
   color: white;
+  margin-bottom: 25vh;
 }
 
 .App-link {
@@ -61,6 +62,18 @@ code {
 }
 
 .gossip-input {
+  color: white;
+}
+
+.arrow-down {
   position: absolute;
-  bottom: 20%;
+  bottom: 0;
+  animation-duration: 2.5s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-name: bounce;
+}
+
+.gossip-filters {
+  text-align: left;
 }

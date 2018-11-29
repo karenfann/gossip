@@ -35,8 +35,8 @@ class Post extends React.Component {
                 <p className="post-message">hi this is fake gossip</p>
                 <div className="post-footer">
                     <div className="post-react">
-                        <button className="react-button"><span class="react-icon">👍</span> 1</button>
-                        <button className="react-button"><span class="react-icon">👎</span> 2</button>
+                        <button className="react-button"><span className="react-icon">👍</span> 1</button>
+                        <button className="react-button"><span className="react-icon">👎</span> 2</button>
                     </div>
                     <div className="post-comment-toggle" onClick={this.toggleComments}>
                         <h5>Comments</h5>
