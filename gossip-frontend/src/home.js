@@ -38,6 +38,11 @@ class Home extends React.Component {
                 <Post comments={comments}/>
                 <Post comments={comments}/>
                 <Post comments={comments}/>
+                <Post comments={comments}/>
+                <Post comments={comments}/>
+                <Post comments={comments}/>
+                <Post comments={comments}/>
+                <Post comments={comments}/>
             </section>
         </div>
         );
