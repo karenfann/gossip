@@ -16,13 +16,13 @@ class Home extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="bounce">
+          <h1 className="gossip-title">
             <i>gossip.</i>
           </h1>
+          <section className="gossip-input">
+            <Input/>
+          </section>
         </header>
-        <section className="gossip-input">
-          <Input/>
-        </section>
         <section className="gossip-filters">
           <Dropdown filterType="radius" options={radiusOptions}/>
           <Dropdown filterType="sort by" options={popularityOptions}/>

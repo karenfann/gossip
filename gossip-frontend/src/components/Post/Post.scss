@@ -7,28 +7,35 @@
 
 .post-footer {
     margin-top: 30px;
-    margin-bottom: 10px;
-    height: 40px;
-
-    button {
-        border-color: transparent;
-        cursor: pointer;
-    }
+    overflow: auto;
 }
 
 .post-react {
-    float: left;
+    float: right;
 }
 
-.react-like,.react-dislike {
-    font-size: 18px;
+.react-button {
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 5px;
+
     &:focus {
         outline: none;
     }
+
+    &:hover {
+        border-color: pink;
+    }
+}
+
+.react-icon {
+    font-size: 14px;
 }
 
 .post-header {
-    height: 50px;
+    overflow: auto;
 }
 
 .post-timestamp-wrapper {
@@ -40,10 +47,18 @@
 }
 
 .post-comment-toggle {
-    float: right;
+    float: left;
 
     &:hover {
         cursor: pointer;
         color: pink;
     }
+
+    h5 {
+        margin: 10px 0;
+    }
+}
+
+.post-comment-section {
+    font-size: 14px;
 }

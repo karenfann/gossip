@@ -4,10 +4,24 @@ import './Post.scss'
 import Comment from '../Comment'
 
 class Post extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            showComments: false
+        }
+        this.toggleComments = this.toggleComments.bind(this)
+    }
+
+    toggleComments = () => {
+        this.setState(prevState => {
+            return {showComments: !prevState.showComments}
+        })
+    }
+
     render() {
         const comments = this.props.comments.map(comment => (
             <Comment text={comment}/>
-        ));
+        ))
         return (
             <div className="post">
                 <div className="post-header">
@@ -21,17 +35,18 @@ class Post extends React.Component {
                 <p className="post-message">hi this is fake gossip</p>
                 <div className="post-footer">
                     <div className="post-react">
-                        <button className="react-like">👍</button>
-                        <button className="react-dislike">👎</button>
+                        <button className="react-button"><span class="react-icon">👍</span> 1</button>
+                        <button className="react-button"><span class="react-icon">👎</span> 2</button>
                     </div>
-                    <div className="post-comment-toggle">
+                    <div className="post-comment-toggle" onClick={this.toggleComments}>
                         <h5>Comments</h5>
                     </div>
                 </div>
-                {/* <div className="post-comment-section">
-                    <p>Comments</p>
-                    <div className="post-comments">{comments}</div>
-                </div> */}
+                { this.state.showComments && 
+                    <div className="post-comment-section">
+                        <div className="post-comments">{comments}</div>
+                    </div>
+                }
             </div>
         )
     }

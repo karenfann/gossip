@@ -7,7 +7,7 @@ class Input extends React.Component {
     render() {
         return (
             <div className="input-wrapper">
-                <button className="form-button" type="button">enter</button>
+                <button className="form-button" type="button">submit</button>
                 <div className="form-input-wrapper">
                     <input className="form-input" placeholder="hello" />
                 </div>
