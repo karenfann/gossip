@@ -4,10 +4,12 @@ import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger'
 
 import User from './user'
+import Gossip from './gossip'
 
 const store = createStore(
     combineReducers({
-        User
+        User,
+        Gossip
     }),
     applyMiddleware(
       thunk,

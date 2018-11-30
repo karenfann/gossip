@@ -39,3 +39,5 @@ const Gossip = (state=initialState, action) => {
 
     }
 }
+
+export default Gossip
