@@ -14,10 +14,14 @@ const popularityOptions = ["Least Popular", "Most Popular"];
 const comments = ["hi", "hello", "hey"];
 
 class Home extends React.Component {
+    constructor(props) {
+        super(props)
+    }
     componentDidMount() {
         this.props.fetchLocation()
     }
     render() {
+        console.log(this.props)
         return (
         <div className="App">
             <header className="App-header">
