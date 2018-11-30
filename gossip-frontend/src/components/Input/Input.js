@@ -45,7 +45,6 @@ class Input extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     const { gossipActions } = actions
-    console.log(gossipActions)
     return {
         createGossip: (text) => {
             dispatch(gossipActions.createGossip(text))

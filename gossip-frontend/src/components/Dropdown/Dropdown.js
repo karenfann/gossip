@@ -6,7 +6,7 @@ import './Dropdown.scss'
 class Dropdown extends React.Component {
     render() {
         const options = this.props.options.map(option => (
-            <option value={option}>{option}</option>
+            <option value={option} key={option}>{option}</option>
         ))
 
         return (
