@@ -12,13 +12,16 @@ db.settings({
  * Returns a promise containing a list of the docs in the collection gossips
  * which are within the specified radius.
  * @param {Geolocation} userLocation 
- * @param {int} radius 
+ * @param {int} radius in miles
  */
 export const getGossip = (userLocation, radius) => {
-    
     return new Promise((resolve) => {
         // Get all the documents, for each compute the distance between userLocation and 
         // the location specified by the document
+
+        // TODO: convert radius in miles to lat/long
+        // TODO: verify the redux action works correctly
+
         db.collection('gossips').get()
         .then(querySnapshot => {
             let docsInRange = []

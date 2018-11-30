@@ -62,3 +62,11 @@ import actions from 'actions'
 const { gossipActions } = actions
 dispatch(gossipActions.createGossip(text))
 ```
+
+### Fetch Gossips within range
+```js
+import actions from 'actions'
+
+const { gossipActions } = actions
+dispatch(gossipActions.fetchGossip(radius))
+```
