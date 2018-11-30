@@ -13,7 +13,7 @@ export const postGossip = (text, location) => {
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         comments: [],
         negative_reacts: 0,
-        positive_react: 0
+        positive_reacts: 0
     })
 }
 
