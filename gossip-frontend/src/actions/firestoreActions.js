@@ -6,15 +6,22 @@ db.settings({
   timestampsInSnapshots: true
 });
 
+
+/**
+ * Fetch gossip
+ * Returns a promise containing a list of the docs in the collection gossips
+ * which are within the specified radius.
+ * @param {Geolocation} userLocation 
+ * @param {int} radius 
+ */
 export const getGossip = (userLocation, radius) => {
-    // Get all the documents, for each compute the distance between userLocation and 
-    // the location specified by the document
+    
     return new Promise((resolve) => {
-        // TODO return a promise and resolve with the docsInRange!
+        // Get all the documents, for each compute the distance between userLocation and 
+        // the location specified by the document
         db.collection('gossips').get()
         .then(querySnapshot => {
             let docsInRange = []
-            console.log('getGossip query snapshot: ', querySnapshot)
             querySnapshot.forEach(doc => {    
                 // Compute distance between
                 let dx = doc.data().location.longitude - userLocation.longitude
