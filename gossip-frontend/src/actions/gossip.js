@@ -1,4 +1,4 @@
-import { POST_GOSSIP_START, POST_GOSSIP_SUCCESS, POST_GOSSIP_ERROR } from '../actions/gossip'
+import { POST_GOSSIP_START, POST_GOSSIP_SUCCESS, POST_GOSSIP_ERROR } from '../constants/gossip'
 import { postGossip } from './firestoreActions'
 
 const createGossip = text => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import {fetchLocation} from './actions/user'
+import actions from './actions'
 import './index.scss'
 
 /* COMPONENTS */
@@ -56,9 +56,10 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
+    const { userActions } = actions
     return {
         fetchLocation: () => {
-            dispatch(fetchLocation())
+            dispatch(userActions.fetchLocation())
         }
     }
 }
