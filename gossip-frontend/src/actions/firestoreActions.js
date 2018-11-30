@@ -1,18 +1,23 @@
-const fetchDocumentProperty = () => {
+import firebase from 'firebase'
+const db = firebase.firestore()
 
-      const db = firebase.firestore();
-      db.settings({timestampsInSnapshots: true});
-      let gossips = db.collection('gossips');
-      gossips.get().then(snapshot => {
-          snapshot.forEach(doc => {
-              console.log( doc.data().text );
-          })
-      })
-  }
+// Disable deprecated features
+db.settings({
+  timestampsInSnapshots: true
+});
+
+export const postGossip = (text, location) => {
+    return db.collection('gossips').add({
+        text,
+        location: new firebase.firestore.GeoPoint(location.latitude, location.longitude),
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        comments: [],
+        negative_reacts: 0,
+        positive_react: 0
+    })
+}
 
 const fetchAllDocuments = () => {
-      const db = firebase.firestore();
-      db.settings({timestampsInSnapshots: true});
       db.collection("gossips").get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
           // doc.data() is never undefined for query doc snapshots
@@ -20,3 +25,4 @@ const fetchAllDocuments = () => {
           });
       });
   }
+

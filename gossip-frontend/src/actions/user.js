@@ -1,7 +1,6 @@
 import { FETCH_LOCATION_START, FETCH_LOCATION_SUCCESS, FETCH_LOCATION_ERROR } from '../constants/user'
 
 const successHandler = (position, dispatch) => {
-    console.log(position)
     dispatch({
         type: FETCH_LOCATION_SUCCESS,
         position: {
@@ -12,7 +11,6 @@ const successHandler = (position, dispatch) => {
 }
 
 const errorHandler = dispatch => {
-    console.log('HERE')
     dispatch({
         type: FETCH_LOCATION_ERROR
     })
@@ -20,7 +18,6 @@ const errorHandler = dispatch => {
 
 const fetchLocation = () => {
     return dispatch => {
-        console.log('we are here')
         dispatch({
             type: FETCH_LOCATION_START
         })

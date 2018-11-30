@@ -7,6 +7,6 @@ const config = {
   projectId: "gossip-9fb8c",
   storageBucket: "gossip-9fb8c.appspot.com",
   messagingSenderId: "152144982801"
-};
-firebase.initializeApp(config);
-export default firebase;
+}
+
+firebase.initializeApp(config)
