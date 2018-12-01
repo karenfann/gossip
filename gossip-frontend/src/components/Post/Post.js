@@ -1,15 +1,20 @@
 import React from 'react'
 import './Post.scss'
 
-import Comment from '../Comment'
+import CommentSection from '../CommentSection'
+import computeRadius from '../../helpers/MathHelpers'
 
 class Post extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            showComments: false
+            showComments: false,
+            reacted: false
         }
         this.toggleComments = this.toggleComments.bind(this)
+        this.handleLike = this.handleLike.bind(this)
+        this.handleDislike = this.handleDislike.bind(this)
+        this.handleReact = this.handleReact.bind(this)
     }
 
     toggleComments = () => {
@@ -18,34 +23,73 @@ class Post extends React.Component {
         })
     }
 
+    handleLike = () => {
+        if (!this.state.reacted) {
+            console.log('liked')
+            this.handleReact()
+        }
+    }
+
+    handleDislike = () => {
+        if (!this.state.reacted) {
+            console.log('disliked')
+            this.handleReact()
+        }
+    }
+
+    handleReact = () => {
+        this.setState({
+            reacted: true
+        })
+    }
+
     render() {
-        const comments = this.props.comments.map(comment => (
-            <Comment text={comment}/>
-        ))
+        const { 
+            text,
+            comments, 
+            positive_reacts, 
+            negative_reacts, 
+            timestamp, 
+            location 
+        } = this.props.gossip.data()
+        console.log(this.props.userLocation)
+        
+        // Calculate location
+        const postDistance = computeRadius(this.props.userLocation.latitude, this.props.userLocation.longitude, location.latitude, location.longitude);   
+        
+        // format timestamp
+        const t = new Date(1970, 0, 1) // Epoch
+        t.setSeconds(timestamp.seconds)
+
+        // Get all posts
         return (
             <div className="post">
                 <div className="post-header">
                     <div className="post-timestamp-wrapper">
-                        <h5 className="post-timestamp">Nov 28 9:32 pm</h5>
+                        <h5 className="post-timestamp">{t.toDateString()}</h5>
                     </div>
                     <div className="post-distance-wrapper">
-                        <h5 className="post-distance">1.2 mi</h5>
+                        <h5 className="post-distance">{postDistance} mi</h5>
                     </div>
                 </div>
-                <p className="post-message">hi this is fake gossip</p>
+                <p className="post-message">{text}</p>
                 <div className="post-footer">
                     <div className="post-react">
-                        <button className="react-button"><span className="react-icon">👍</span> 1</button>
-                        <button className="react-button"><span className="react-icon">👎</span> 2</button>
+                        <button className="react-button" onClick={this.handleLike}>
+                            <span className="react-icon">👍</span>
+                            {positive_reacts}
+                        </button>
+                        <button className="react-button" onClick={this.handleDislike}>
+                            <span className="react-icon">👎</span>
+                            {negative_reacts}
+                        </button>
                     </div>
                     <div className="post-comment-toggle" onClick={this.toggleComments}>
                         <h5>Comments</h5>
                     </div>
                 </div>
                 { this.state.showComments && 
-                    <div className="post-comment-section">
-                        <div className="post-comments">{comments}</div>
-                    </div>
+                    <CommentSection comments={comments}/>
                 }
             </div>
         )

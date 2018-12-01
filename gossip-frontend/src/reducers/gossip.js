@@ -4,7 +4,7 @@ import {
 } from '../constants/gossip'
 
 const initialState = {
-    gossips: [],
+    gossip: [],
     _internal: {
         loading: false,
         error: false
@@ -48,6 +48,7 @@ const Gossip = (state=initialState, action) => {
         case GET_GOSSIP_SUCCESS:
             return {
                 ...state,
+                gossip: action.gossip,
                 _internal: {
                     loading: false,
                     error: false

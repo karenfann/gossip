@@ -39,9 +39,10 @@ const fetchGossip = (radius) => {
                 throw new Error('User location is not set')
             }
 
-            await getGossip(User.location, radius)
+            let gossip = await getGossip(User.location, radius)
             dispatch({
-                type: GET_GOSSIP_SUCCESS
+                type: GET_GOSSIP_SUCCESS,
+                gossip: gossip
             })
         } catch (err) {
             dispatch({

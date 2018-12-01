@@ -1,5 +1,4 @@
 import React from 'react'
-import { render } from 'react-dom'
 
 import './Dropdown.scss'
 
@@ -10,8 +9,7 @@ class Dropdown extends React.Component {
         ))
 
         return (
-            <select className="dropdown-select">
-                <option value="default">{this.props.filterType}</option>
+            <select className="dropdown-select" onChange={this.props.handleValueChange} defaultValue="radius">
                 {options}
             </select>
         );
