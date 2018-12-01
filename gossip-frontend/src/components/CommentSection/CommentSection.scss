@@ -1,8 +1,12 @@
 .post-comment {
     font-size: 1em;
-    padding: 5px 5px 20px 5px;
-    background: #eed5db;
-    color: #fff;
+    padding: 10px;
+    background: #fdeff2;
+    color: black;
     width: 100%;
-    margin: 10px auto;
+    box-sizing: border-box;
+}
+
+.post-comment-section {
+    overflow: auto;
 }

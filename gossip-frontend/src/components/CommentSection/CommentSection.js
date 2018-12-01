@@ -12,18 +12,18 @@ class CommentSection extends React.Component {
         this.handleNewComment = this.handleNewComment.bind(this);
     }
 
-    handleNewComment() {
-        this.setState({
-            displayedComments: this.props.comments
-        })
+    handleNewComment(comment) {
+        this.setState(prevState => ({
+            displayedComments: prevState.displayedComments.concat(comment)
+        }))
     }
 
     render() {
         let comments = this.state.displayedComments.map(text => {
             return (
-                <div className="post-comment">
+                <p className="post-comment">
                     {text}
-                </div>
+                </p>
             )
         })
         return (

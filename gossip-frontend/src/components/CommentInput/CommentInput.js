@@ -25,10 +25,10 @@ class CommentInput extends React.Component {
 
         if (comment.length) {
             this.props.postCommentOnPost(this.props.docId, comment);
+            this.props.handleNewComment(comment)
             this.setState({
                 value: ""
             })
-            this.props.handleNewComment()
         }
     }
 

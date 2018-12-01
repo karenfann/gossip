@@ -4,6 +4,8 @@
     height: 5em;
     resize: none;
     border: 1px solid #D3D3D3;
+    box-sizing: border-box;
+    margin-top: 10px;
 
     &:focus {
         outline: none;
@@ -12,7 +14,7 @@
 
 .commentSubmit {
     padding: 5px 10px 5px 10px;
-    margin: 10px;
+    margin: 10px 0;
     background-color: #df889d;
     color: white;
     border: none;
@@ -20,6 +22,7 @@
     cursor: pointer;
     float: right;
     font-weight: 700;
+    clear: both;
 
     &:focus {
         outline: none;
