@@ -1,0 +1,27 @@
+.commentInput {
+    font-size: 1em;
+    width: 100%;
+    height: 5em;
+    resize: none;
+    border: 1px solid #D3D3D3;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.commentSubmit {
+    padding: 5px 10px 5px 10px;
+    margin: 10px;
+    background-color: #df889d;
+    color: white;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    float: right;
+    font-weight: 700;
+
+    &:focus {
+        outline: none;
+    }
+}

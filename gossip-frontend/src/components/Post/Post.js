@@ -86,7 +86,7 @@ class Post extends React.Component {
                     </div>
                 </div>
                 { this.state.showComments && 
-                    <CommentSection comments={comments}/>
+                    <CommentSection docId={this.props.gossip.id} comments={comments}/>
                 }
             </div>
         )

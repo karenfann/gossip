@@ -93,7 +93,6 @@ const updatePostReact = (docID, react = true) => {
     }
 }
 
-
 export {
     createGossip,
     fetchGossip,
