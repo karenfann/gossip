@@ -76,6 +76,11 @@ const mapDispatchToProps = dispatch => {
         fetchGossip: (radius) => {
             dispatch(gossipActions.fetchGossip(radius))
         },        
+
+        // TODO: remove!!
+        postCommentOnPost: (postId, commentText) => {
+            dispatch(gossipActions.postCommentOnPost(postId, commentText))
+        }
     }
 }
 

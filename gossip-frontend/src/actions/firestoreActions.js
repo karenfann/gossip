@@ -83,6 +83,31 @@ export const postGossip = (text, location) => {
     })
 }
 
+export const postComment = (postId, commentText) => {
+    return new Promise(resolve => {
+        const postRef = db.collection('gossips').doc(postId)
+        postRef.get()
+        .then(doc => {
+            console.log("got a doc and trying to push comment now")
+            let updatedComments = doc.data().comments 
+            updatedComments.push(commentText)
+            postRef.update({
+                comments: updatedComments
+            })
+            .then(() => {
+                resolve(true)
+            })
+            .catch(e => {
+                console.log("Error posting comment to firestore: ", e)
+                resolve(false)
+            })
+        })
+        .catch(e => {
+            console.log("Error getting doc from firestore: ", e)
+        })
+    })
+}
+
 const fetchAllDocuments = () => {
       db.collection("gossips").get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
