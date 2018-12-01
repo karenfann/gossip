@@ -11,12 +11,12 @@ db.settings({
  * Fetch gossip
  * Returns a promise containing a list of the docs in the collection gossips
  * which are within the specified radius.
- * @param {Geolocation} userLocation 
+ * @param {Geolocation} userLocation
  * @param {int} radius in miles
  */
 export const getGossip = (userLocation, radius) => {
     return new Promise((resolve) => {
-        // Get all the documents, for each compute the distance between userLocation and 
+        // Get all the documents, for each compute the distance between userLocation and
         // the location specified by the document
 
         // TODO: convert radius in miles to lat/long
@@ -25,7 +25,7 @@ export const getGossip = (userLocation, radius) => {
         db.collection('gossips').get()
         .then(querySnapshot => {
             let docsInRange = []
-            querySnapshot.forEach(doc => {    
+            querySnapshot.forEach(doc => {
                 // Compute distance between
                 let dx = doc.data().location.longitude - userLocation.longitude
                 let dy = doc.data().location.latitude - userLocation.latitude
@@ -44,6 +44,33 @@ export const getGossip = (userLocation, radius) => {
             console.log("Error getting gossips: ", e)
         })
     })
+}
+
+//
+export const updateReact = (docID, react = true) => {
+        return new Promise((resolve) => {
+            db.collection("gossips").doc(docID)
+              .get()
+              .then(doc => {
+                console.log(doc.id, " => ", doc.data());
+                var updates = {};
+                if (react == true) {
+                    updates['positive_reacts'] = doc.data().positive_reacts + 1
+                }
+                else {
+                    updates['negative_reacts'] = doc.data().negative_reacts + 1
+                }
+                // Build doc ref from doc.id
+                db.collection("gossips").doc(docID).update(updates).then(() => {
+                    console.log('updateReact function worked!')
+                    resolve(true)
+                }).catch(e => {
+                    console.log("Error updating reacts: ", e)
+                    resolve(false)
+                })
+             })
+        }
+    )
 }
 
 export const postGossip = (text, location) => {
@@ -88,7 +115,4 @@ const fetchAllDocuments = () => {
           console.log(doc.id, " => ", doc.data());
           });
       });
-  }
-
-
-
+}

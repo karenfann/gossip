@@ -8,16 +8,28 @@ import './index.scss'
 import Dropdown from './components/Dropdown'
 import Input from './components/Input'
 import Post from './components/Post'
+import PostSection from './components/PostSection'
 
 const radiusOptions = ["0.5 miles", "1 mile", "2 miles"];
 const popularityOptions = ["Least Popular", "Most Popular"];
 const comments = ["hi", "hello", "hey"];
 
 class Home extends React.Component {
-    componentDidMount() {
+    constructor(props) {
+        super(props)
         this.props.fetchLocation()
+            .then(() => {
+                this.props.fetchGossip(2)
+            })
     }
+
+    handleRadiusChange = (e) => {
+        console.log("radius changed" + e.target.value)
+        this.props.fetchGossip(e.target.value)
+    }
+
     render() {
+        console.log(this.props)
         return (
         <div className="App">
             <header className="App-header">
@@ -30,20 +42,12 @@ class Home extends React.Component {
                 <Input/>
             </section>
             <section className="gossip-filters">
-                <Dropdown filterType="radius" options={radiusOptions}/>
+                <Dropdown filterType="radius" options={radiusOptions} onChange={this.handleRadiusChange}/>
                 <Dropdown filterType="sort by" options={popularityOptions}/>
             </section>
-            <section className="gossip-posts">
-                <Post comments={comments}/>
-                <Post comments={comments}/>
-                <Post comments={comments}/>
-                <Post comments={comments}/>
-                <Post comments={comments}/>
-                <Post comments={comments}/>
-                <Post comments={comments}/>
-                <Post comments={comments}/>
-                <Post comments={comments}/>
-            </section>
+            { (this.props.Gossip && this.props.Gossip.gossip) && 
+                <PostSection gossips={this.props.Gossip.gossip} userLocation={this.props.User.location}/>
+            }
         </div>
         );
     }
@@ -56,11 +60,14 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-    const { userActions } = actions
+    const { userActions, gossipActions } = actions
     return {
         fetchLocation: () => {
-            dispatch(userActions.fetchLocation())
-        }
+            return dispatch(userActions.fetchLocation())
+        },
+        fetchGossip: (radius) => {
+            dispatch(gossipActions.fetchGossip(radius))
+        },        
     }
 }
 
