@@ -1,6 +1,8 @@
 import firebase from 'firebase'
 const db = firebase.firestore()
 
+import computeRadius from '../helpers/MathHelpers'
+
 // Disable deprecated features
 db.settings({
   timestampsInSnapshots: true
@@ -26,10 +28,7 @@ export const getGossip = (userLocation, radius) => {
         .then(querySnapshot => {
             let docsInRange = []
             querySnapshot.forEach(doc => {
-                // Compute distance between
-                let dx = doc.data().location.longitude - userLocation.longitude
-                let dy = doc.data().location.latitude - userLocation.latitude
-                let distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2))
+                const distance = computeRadius(userLocation.latitude, userLocation.longitude, doc.data().location.latitude, doc.data().location.longitude)
                 console.log("Distance between: ", distance)
 
                 // Compute time since post

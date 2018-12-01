@@ -40,8 +40,6 @@ class Input extends React.Component {
                     <input className="form-input" placeholder="spill the tea" onChange={this.handleValueChange} value={this.state.value}/>
                 </div>
             </div>
-
-            
         );
     }
 }

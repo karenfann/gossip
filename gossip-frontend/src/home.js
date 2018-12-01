@@ -10,7 +10,7 @@ import Input from './components/Input'
 import Post from './components/Post'
 import PostSection from './components/PostSection'
 
-const radiusOptions = ["0.5 miles", "1 mile", "2 miles"];
+const radiusOptions = ["0.5", "1", "2"];
 const popularityOptions = ["Least Popular", "Most Popular"];
 const comments = ["hi", "hello", "hey"];
 
@@ -21,15 +21,23 @@ class Home extends React.Component {
             .then(() => {
                 this.props.fetchGossip(2)
             })
+
+        this.state = {
+            sortBy: "least"
+        }
     }
 
     handleRadiusChange = (e) => {
-        console.log("radius changed" + e.target.value)
         this.props.fetchGossip(e.target.value)
     }
 
+    handleSortByChange = (e) => {
+        this.setState({
+            sortBy: e.target.value == "Least Popular" ? "least" : "most"
+        })
+    }
+
     render() {
-        console.log(this.props)
         return (
         <div className="App">
             <header className="App-header">
@@ -42,11 +50,11 @@ class Home extends React.Component {
                 <Input/>
             </section>
             <section className="gossip-filters">
-                <Dropdown filterType="radius" options={radiusOptions} onChange={this.handleRadiusChange}/>
-                <Dropdown filterType="sort by" options={popularityOptions}/>
+                <Dropdown filterType="radius" default="2" unit="mi" options={radiusOptions} onChange={this.handleRadiusChange}/>
+                <Dropdown filterType="sort by" options={popularityOptions} onChange={this.handleSortByChange}/>
             </section>
             { (this.props.Gossip && this.props.Gossip.gossip) && 
-                <PostSection gossips={this.props.Gossip.gossip} userLocation={this.props.User.location}/>
+                <PostSection gossips={this.props.Gossip.gossip} userLocation={this.props.User.location} sortBy={this.state.sortBy}/>
             }
         </div>
         );
