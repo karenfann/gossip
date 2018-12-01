@@ -2,6 +2,7 @@ import React from 'react'
 import './Post.scss'
 
 import Comment from '../Comment'
+import { updateReact } from '../../actions/gossip'
 
 class Post extends React.Component {
     constructor(props) {
@@ -42,7 +43,7 @@ class Post extends React.Component {
                         <h5>Comments</h5>
                     </div>
                 </div>
-                { this.state.showComments && 
+                { this.state.showComments &&
                     <div className="post-comment-section">
                         <div className="post-comments">{comments}</div>
                     </div>
