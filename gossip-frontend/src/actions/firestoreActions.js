@@ -86,10 +86,11 @@ export const postGossip = (text, location) => {
 
 export const postComment = (postId, commentText) => {
     return new Promise(resolve => {
-        postRef = db.collection('gossips').doc(postId)
+        const postRef = db.collection('gossips').doc(postId)
         postRef.get()
         .then(doc => {
-            updatedComments = doc.data().comments 
+            console.log("got a doc and trying to push comment now")
+            let updatedComments = doc.data().comments 
             updatedComments.push(commentText)
             postRef.update({
                 comments: updatedComments

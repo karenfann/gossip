@@ -4,7 +4,7 @@ import {
     POST_COMMENT_START, POST_COMMENT_SUCCESS, POST_COMMENT_ERROR,
     UPDATE_REACT_START, UPDATE_REACT_SUCCESS, UPDATE_REACT_ERROR
 } from '../constants/gossip'
-import { postGossip, getGossip, updateReact } from './firestoreActions'
+import { postGossip, getGossip, updateReact, postComment } from './firestoreActions'
 
 const createGossip = text => {
     return async (dispatch, getState) => {
@@ -68,6 +68,7 @@ const postCommentOnPost = (postId, commentText) => {
         } catch (err) {
             dispatch({
                 type: POST_COMMENT_ERROR,
+                error: err.message
             })
         }
     }
@@ -96,5 +97,6 @@ const updatePostReact = (docID, react = true) => {
 export {
     createGossip,
     fetchGossip,
+    postCommentOnPost, 
     updatePostReact
 }
