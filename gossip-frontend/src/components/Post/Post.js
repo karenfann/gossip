@@ -82,7 +82,7 @@ class Post extends React.Component {
                         </button>
                     </div>
                     <div className="post-comment-toggle" onClick={this.toggleComments}>
-                        <h5>Comments</h5>
+                        <h5>Comments ({comments.length})</h5>
                     </div>
                 </div>
                 { this.state.showComments && 
