@@ -1,4 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
+import actions from '../../actions'
 import './Post.scss'
 
 import CommentSection from '../CommentSection'
@@ -24,8 +27,10 @@ class Post extends React.Component {
     }
 
     handleLike = () => {
+        const { gossip } = this.props
+        const { id} = gossip
         if (!this.state.reacted) {
-            console.log('liked')
+            this.props.updatePostReact(id, true)
             this.handleReact()
         }
     }
@@ -50,9 +55,8 @@ class Post extends React.Component {
             positive_reacts, 
             negative_reacts, 
             timestamp, 
-            location 
+            location
         } = this.props.gossip.data()
-        console.log(this.props.userLocation)
         
         // Calculate location
         const postDistance = computeRadius(this.props.userLocation.latitude, this.props.userLocation.longitude, location.latitude, location.longitude);   
@@ -96,4 +100,13 @@ class Post extends React.Component {
     }
 }
 
-export default Post
+const mapDispatchToProps = dispatch => {
+    const { gossipActions } = actions
+    return {
+        updatePostReact: (docId, react) => {
+            return dispatch(gossipActions.updatePostReact(docId, react))
+        }  
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Post)

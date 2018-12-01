@@ -1,8 +1,9 @@
-import { 
+import {
     POST_GOSSIP_START, POST_GOSSIP_SUCCESS, POST_GOSSIP_ERROR,
-    GET_GOSSIP_START, GET_GOSSIP_SUCCESS, GET_GOSSIP_ERROR 
+    GET_GOSSIP_START, GET_GOSSIP_SUCCESS, GET_GOSSIP_ERROR,
+    UPDATE_REACT_START, UPDATE_REACT_SUCCESS, UPDATE_REACT_ERROR
 } from '../constants/gossip'
-import { postGossip, getGossip } from './firestoreActions'
+import { postGossip, getGossip, updateReact } from './firestoreActions'
 
 const createGossip = text => {
     return async (dispatch, getState) => {
@@ -15,7 +16,7 @@ const createGossip = text => {
                 throw new Error('User location is not set')
             }
 
-            await postGossip(text, User.location) 
+            await postGossip(text, User.location)
             dispatch({
                 type: POST_GOSSIP_SUCCESS
             })
@@ -53,7 +54,27 @@ const fetchGossip = (radius) => {
     }
 }
 
+const updatePostReact = (docID, react = true) => {
+    return async (dispatch) => {
+        dispatch({
+            type: UPDATE_REACT_START
+        })
+        try {
+            await updateReact(docID, react)
+            dispatch({
+            type: UPDATE_REACT_SUCCESS
+            })
+        } catch (err) {
+            dispatch({
+                type: UPDATE_REACT_ERROR,
+                error: err.message
+            })
+        }
+    }
+}
+
 export {
     createGossip,
     fetchGossip,
+    updatePostReact
 }
