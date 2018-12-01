@@ -28,6 +28,7 @@ class CommentInput extends React.Component {
             this.setState({
                 value: ""
             })
+            this.props.handleNewComment()
         }
     }
 
