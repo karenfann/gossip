@@ -12,11 +12,11 @@ class Post extends React.Component {
         super(props)
         this.state = {
             showComments: false,
-            reacted: false
+            reacted: false,
+            positive_reacts: this.props.gossip.data().positive_reacts,
+            negative_reacts: this.props.gossip.data().negative_reacts
         }
         this.toggleComments = this.toggleComments.bind(this)
-        this.handleLike = this.handleLike.bind(this)
-        this.handleDislike = this.handleDislike.bind(this)
         this.handleReact = this.handleReact.bind(this)
     }
 
@@ -26,37 +26,30 @@ class Post extends React.Component {
         })
     }
 
-    handleLike = () => {
+    handleReact = (react) => {
         const { gossip } = this.props
-        const { id} = gossip
+        const { id }  = gossip
         if (!this.state.reacted) {
-            this.props.updatePostReact(id, true)
-            this.handleReact()
+            this.props.updatePostReact(id, react)
+            this.setState(prevState => ({
+                reacted: true,
+                positive_reacts: react ? prevState.positive_reacts + 1 : prevState.positive_reacts,
+                negative_reacts: react ? prevState.negative_reacts : prevState.negative_reacts + 1
+            }))
         }
-    }
-
-    handleDislike = () => {
-        if (!this.state.reacted) {
-            console.log('disliked')
-            this.handleReact()
-        }
-    }
-
-    handleReact = () => {
-        this.setState({
-            reacted: true
-        })
     }
 
     render() {
         const { 
             text,
             comments, 
-            positive_reacts, 
-            negative_reacts, 
             timestamp, 
             location
         } = this.props.gossip.data()
+        const {
+            positive_reacts, 
+            negative_reacts
+        } = this.state
         
         // Calculate location
         const postDistance = computeRadius(this.props.userLocation.latitude, this.props.userLocation.longitude, location.latitude, location.longitude);   
@@ -79,11 +72,11 @@ class Post extends React.Component {
                 <p className="post-message">{text}</p>
                 <div className="post-footer">
                     <div className="post-react">
-                        <button className="react-button" onClick={this.handleLike}>
+                        <button className="react-button" onClick={() => this.handleReact(true)}>
                             <span className="react-icon">👍</span>
                             {positive_reacts}
                         </button>
-                        <button className="react-button" onClick={this.handleDislike}>
+                        <button className="react-button" onClick={() => this.handleReact(false)}>
                             <span className="react-icon">👎</span>
                             {negative_reacts}
                         </button>

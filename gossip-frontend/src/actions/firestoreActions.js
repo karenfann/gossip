@@ -58,7 +58,7 @@ export const updateReact = (docID, react = true) => {
                     updates['positive_reacts'] = doc.data().positive_reacts + 1
                 }
                 else {
-                    updates['negative react'] = doc.data().negative_reacts + 1
+                    updates['negative_reacts'] = doc.data().negative_reacts + 1
                 }
                 // Build doc ref from doc.id
                 db.collection("gossips").doc(docID).update(updates).then(() => {
