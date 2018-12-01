@@ -1,6 +1,7 @@
 import { 
     POST_GOSSIP_START, POST_GOSSIP_SUCCESS, POST_GOSSIP_ERROR,
-    GET_GOSSIP_START, GET_GOSSIP_SUCCESS, GET_GOSSIP_ERROR 
+    GET_GOSSIP_START, GET_GOSSIP_SUCCESS, GET_GOSSIP_ERROR,
+    POST_COMMENT_START, POST_COMMENT_SUCCESS, POST_COMMENT_ERROR
 } from '../constants/gossip'
 import { postGossip, getGossip } from './firestoreActions'
 
@@ -46,6 +47,25 @@ const fetchGossip = (radius) => {
         } catch (err) {
             dispatch({
                 type: GET_GOSSIP_ERROR,
+                error: err.message
+            })
+        }
+    }
+}
+
+const postCommentOnPost = (postId, commentText) => {
+    return async (dispatch) => {
+        dispatch({
+            type: POST_COMMENT_START
+        })
+        try {
+            await postComment(postId, commentText)
+            dispatch({
+                type: POST_COMMENT_SUCCESS
+            })
+        } catch (err) {
+            dispatch({
+                type: POST_COMMENT_ERROR,
                 error: err.message
             })
         }
