@@ -7,7 +7,8 @@ const initialState = {
     },
     _internal: {
         loading: false,
-        error: false
+        error: false,
+        fetched: false
     },
     text: null
 }
@@ -20,6 +21,7 @@ const User = (state=initialState, action) => {
                 _internal: {
                     error: false,
                     loading: true,
+                    fetched: false
                 }
             }
         case FETCH_LOCATION_SUCCESS: 
@@ -27,7 +29,8 @@ const User = (state=initialState, action) => {
                 ...state,
                 _internal: {
                     error: false,
-                    loading: false
+                    loading: false,
+                    fetched: true
                 },
                 location: {
                     latitude: action.position.latitude,
@@ -40,7 +43,8 @@ const User = (state=initialState, action) => {
                 text: null,
                 _internal: {
                     loading: false,
-                    error: true
+                    error: true,
+                    fetched: false
                 }
             }
         default:

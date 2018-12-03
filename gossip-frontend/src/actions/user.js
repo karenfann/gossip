@@ -16,22 +16,16 @@ const errorHandler = dispatch => {
     })
 }
 
-const fetchLocation = () => (dispatch) => {
-    return new Promise(function(resolve, reject) {
+const fetchLocation = () => {
+    return dispatch => {
         dispatch({
             type: FETCH_LOCATION_START
         })
         navigator.geolocation.getCurrentPosition(
-            position => {
-                successHandler(position, dispatch)
-                resolve()
-            },
-            () => {
-                errorHandler(dispatch)
-                reject()
-            }
+            position => successHandler(position, dispatch),
+            () => errorHandler(dispatch)
         )
-    });
+    }
 }
 
 export {

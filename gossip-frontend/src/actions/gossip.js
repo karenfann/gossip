@@ -4,7 +4,7 @@ import {
     POST_COMMENT_START, POST_COMMENT_SUCCESS, POST_COMMENT_ERROR,
     UPDATE_REACT_START, UPDATE_REACT_SUCCESS, UPDATE_REACT_ERROR
 } from '../constants/gossip'
-import { postGossip, getGossip, updateReact, postComment } from './firestoreActions'
+import { postGossip, getGossips, updateReact, postComment } from './firestoreActions'
 
 const createGossip = text => {
     return async (dispatch, getState) => {
@@ -41,7 +41,7 @@ const fetchGossip = (radius) => {
                 throw new Error('User location is not set')
             }
 
-            let gossip = await getGossip(User.location, radius)
+            let gossip = await getGossips(User.location, radius)
             dispatch({
                 type: GET_GOSSIP_SUCCESS,
                 gossip: gossip

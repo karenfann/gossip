@@ -17,13 +17,16 @@ const comments = ["hi", "hello", "hey"];
 class Home extends React.Component {
     constructor(props) {
         super(props)
-        this.props.fetchLocation()
-            .then(() => {
-                this.props.fetchGossip(2)
-            })
+        props.fetchLocation()
 
         this.state = {
             sortBy: "least"
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (!prevProps.fetched && this.props.fetched) {
+            this.props.fetchGossip(2)
         }
     }
 
@@ -53,8 +56,8 @@ class Home extends React.Component {
                 <Dropdown filterType="radius" default="2" unit="mi" options={radiusOptions} onChange={this.handleRadiusChange}/>
                 <Dropdown filterType="sort by" options={popularityOptions} onChange={this.handleSortByChange}/>
             </section>
-            { (this.props.Gossip && this.props.Gossip.gossip) && 
-                <PostSection gossips={this.props.Gossip.gossip} userLocation={this.props.User.location} sortBy={this.state.sortBy}/>
+            {this.props.gossips.length && 
+                <PostSection gossips={this.props.gossips} userLocation={this.props.location} sortBy={this.state.sortBy}/>
             }
         </div>
         );
@@ -62,8 +65,11 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = state => {
+    const { User, Gossip } = state
     return {
-        ...state
+        fetched: User._internal.fetched,
+        gossips: Gossip.gossip,
+        location: User.location
     }
 }
 

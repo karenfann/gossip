@@ -17,7 +17,7 @@ db.settings({
  * @param {Geolocation} userLocation
  * @param {int} radius in miles
  */
-export const getGossip = (userLocation, radius) => {
+export const getGossips = (userLocation, radius, timeLimit=24) => {
     return new Promise((resolve) => {
         // Get all the documents, for each compute the distance between userLocation and
         // the location specified by the document
