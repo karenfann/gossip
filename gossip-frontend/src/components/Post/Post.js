@@ -55,8 +55,7 @@ class Post extends React.Component {
         const postDistance = computeRadius(this.props.userLocation.latitude, this.props.userLocation.longitude, location.latitude, location.longitude);   
         
         // format timestamp
-        const t = new Date(1970, 0, 1) // Epoch
-        t.setSeconds(timestamp.seconds)
+        const t = timestamp.toDate()
 
         // Get all posts
         return (

@@ -56,8 +56,9 @@ class Home extends React.Component {
                 <Dropdown filterType="radius" default="2" unit="mi" options={radiusOptions} onChange={this.handleRadiusChange}/>
                 <Dropdown filterType="sort by" options={popularityOptions} onChange={this.handleSortByChange}/>
             </section>
-            {this.props.gossips.length && 
-                <PostSection gossips={this.props.gossips} userLocation={this.props.location} sortBy={this.state.sortBy}/>
+            {this.props.gossips.length ? 
+                <PostSection gossips={this.props.gossips} userLocation={this.props.location} sortBy={this.state.sortBy}/> :
+                <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
             }
         </div>
         );
