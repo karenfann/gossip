@@ -6,16 +6,18 @@ import { createLogger } from 'redux-logger'
 import User from './user'
 import Gossip from './gossip'
 
+const middleware = [thunk]
+if (process.env.NODE_ENV !== 'production') {
+    middleware.push(createLogger({ collapsed: true }))
+}
+
 const store = createStore(
     combineReducers({
         User,
         Gossip
     }),
     applyMiddleware(
-      thunk,
-        createLogger({
-            collapsed: true
-        })
+        ...middleware
     )
 );
 

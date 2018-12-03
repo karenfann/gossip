@@ -46,7 +46,6 @@ export const updateReact = (docID, react = true) => {
             db.collection("gossips").doc(docID)
               .get()
               .then(doc => {
-                console.log(doc.id, " => ", doc.data());
                 var updates = {};
                 if (react == true) {
                     updates['positive_reacts'] = doc.data().positive_reacts + 1
@@ -56,10 +55,8 @@ export const updateReact = (docID, react = true) => {
                 }
                 // Build doc ref from doc.id
                 db.collection("gossips").doc(docID).update(updates).then(() => {
-                    console.log('updateReact function worked!')
                     resolve(true)
                 }).catch(e => {
-                    console.log("Error updating reacts: ", e)
                     resolve(false)
                 })
              })
@@ -83,7 +80,6 @@ export const postComment = (postId, commentText) => {
         const postRef = db.collection('gossips').doc(postId)
         postRef.get()
         .then(doc => {
-            console.log("got a doc and trying to push comment now")
             let updatedComments = doc.data().comments 
             updatedComments.push(commentText)
             postRef.update({
@@ -93,7 +89,6 @@ export const postComment = (postId, commentText) => {
                 resolve(true)
             })
             .catch(e => {
-                console.log("Error posting comment to firestore: ", e)
                 resolve(false)
             })
         })
