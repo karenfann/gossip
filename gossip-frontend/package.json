@@ -20,10 +20,12 @@
   "homepage": "https://github.com/karenfann/gossip#readme",
   "devDependencies": {
     "@babel/core": "^7.1.6",
+    "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-polyfill": "^6.26.0",
     "css-loader": "^1.0.1",
     "file-loader": "^2.0.0",
     "html-loader": "^0.5.5",
@@ -37,7 +39,6 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.0.0",
     "firebase": "^5.5.9",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
