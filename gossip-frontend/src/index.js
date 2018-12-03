@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { store } from './reducers'
 
 // initialize firestore
+import 'firebase/firestore'
 import './config'
 
 import Home from './home'
