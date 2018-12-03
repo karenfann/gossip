@@ -26,12 +26,14 @@ export const getGossips = (userLocation, radius=2, timeLimit=24) => {
         // TODO: verify the redux action works correctly
 
     const secondsLimit = 3600 * timeLimit
-    const now = Math.round((new Date).getTime() / 1000) 
-    const query = db.collection('gossips').where('timestamp', '<=', now - secondsLimit)
+    const hours24 = new Date().getTime() - (24 * 3600 * 1000)
+    const query = db.collection('gossips').where('timestamp', '>', hours24)
 
-    return db.collection('gossips').get().then(querySnapshot => {
+    return query.get().then(querySnapshot => {
         return querySnapshot.docs.reduce((acc, doc) => {
-            const { location } = doc.data()
+            const data = doc.data()
+            console.log(data.timestamp)
+            const { location } = data
             const distance = computeRadius(userLocation.latitude, userLocation.longitude, location.latitude, location.longitude)
             if (distance <= radius) {
                 acc.push(doc)
@@ -63,7 +65,7 @@ export const postGossip = (text, location) => {
     return db.collection('gossips').add({
         text,
         location: new firebase.firestore.GeoPoint(location.latitude, location.longitude),
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        timestamp: new Date().getTime(),
         comments: [],
         negative_reacts: 0,
         positive_reacts: 0
