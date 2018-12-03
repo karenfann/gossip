@@ -58,7 +58,7 @@ class Home extends React.Component {
             </section>
             {this.props.gossips.length ? 
                 <PostSection gossips={this.props.gossips} userLocation={this.props.location} sortBy={this.state.sortBy}/> :
-                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
             }
         </div>
         );
