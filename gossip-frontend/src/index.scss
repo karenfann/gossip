@@ -9,6 +9,9 @@ body {
   // background-color: #df889d;
   background: linear-gradient(#df889d, #eed5db);
   margin: 0 25% 5% 25%;
+  @media screen and (max-width: 600px) {
+    margin: 0 5% 5% 5%;
+  }
 }
 
 code {
@@ -84,6 +87,7 @@ code {
   position: relative;
   width: 40px;
   height: 40px;
+  margin-top: 20px;
 }
 .lds-ring div {
   box-sizing: border-box;
