@@ -31,10 +31,12 @@ export const getGossips = (userLocation, radius=2, timeLimit=24) => {
 
     return db.collection('gossips').get().then(querySnapshot => {
         return querySnapshot.docs.reduce((acc, doc) => {
-            const distance = computeRadius(userLocation.latitude, userLocation.longitude, doc.data().location.latitude, doc.data().location.longitude)
+            const { location } = doc.data()
+            const distance = computeRadius(userLocation.latitude, userLocation.longitude, location.latitude, location.longitude)
             if (distance <= radius) {
                 acc.push(doc)
             }
+
             return acc
         }, [])
     })
@@ -42,29 +44,19 @@ export const getGossips = (userLocation, radius=2, timeLimit=24) => {
 
 //
 export const updateReact = (docID, react = true) => {
-        return new Promise((resolve) => {
-            db.collection("gossips").doc(docID)
-              .get()
-              .then(doc => {
-                console.log(doc.id, " => ", doc.data());
-                var updates = {};
-                if (react == true) {
-                    updates['positive_reacts'] = doc.data().positive_reacts + 1
-                }
-                else {
-                    updates['negative_reacts'] = doc.data().negative_reacts + 1
-                }
-                // Build doc ref from doc.id
-                db.collection("gossips").doc(docID).update(updates).then(() => {
-                    console.log('updateReact function worked!')
-                    resolve(true)
-                }).catch(e => {
-                    console.log("Error updating reacts: ", e)
-                    resolve(false)
-                })
-             })
+    return db.collection('gossips').doc(docID).get().then(doc => {
+        const data = doc.data()
+        const updates = {}
+
+        if (react) {
+            updates['positive_reacts'] = data.positive_reacts + 1
         }
-    )
+        else {
+            updates['negative_reacts'] = data.negative_reacts + 1
+        }
+        // Build doc ref from doc.id
+        return db.collection('gossips').doc(docID).update(updates)
+    })
 }
 
 export const postGossip = (text, location) => {
@@ -79,26 +71,14 @@ export const postGossip = (text, location) => {
 }
 
 export const postComment = (postId, commentText) => {
-    return new Promise(resolve => {
-        const postRef = db.collection('gossips').doc(postId)
-        postRef.get()
-        .then(doc => {
-            console.log("got a doc and trying to push comment now")
-            let updatedComments = doc.data().comments 
-            updatedComments.push(commentText)
-            postRef.update({
-                comments: updatedComments
-            })
-            .then(() => {
-                resolve(true)
-            })
-            .catch(e => {
-                console.log("Error posting comment to firestore: ", e)
-                resolve(false)
-            })
-        })
-        .catch(e => {
-            console.log("Error getting doc from firestore: ", e)
+    const postRef = db.collection('gossips').doc(postId)
+
+    return postRef.get().then(doc => {
+        let updatedComments = doc.data().comments 
+        updatedComments.push(commentText)
+
+        return postRef.update({
+            comments: updatedComments
         })
     })
 }

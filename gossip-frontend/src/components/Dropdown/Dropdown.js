@@ -8,12 +8,10 @@ class Dropdown extends React.Component {
         this.state = {
             value: this.props.default
         }
-        this.handleValueChange = this.handleValueChange.bind(this)
     }
 
     handleValueChange = (e) => {
         this.props.onChange(e)
-        console.log(e)
         this.setState({
             value: e.target.value
         })
@@ -26,8 +24,6 @@ class Dropdown extends React.Component {
                 <option value={option} key={option}>{text}</option>
             )
         })
-
-        console.log(this.props)
 
         return (
             <select className="dropdown-select" onChange={this.handleValueChange} value={this.state.value} >
