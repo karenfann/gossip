@@ -24,9 +24,11 @@ class Input extends React.Component {
     handleClick = () => {
         let gossip = this.state.value.trim()
         if (gossip.length) {
-            this.props.createGossip(gossip)
-            this.setState({
-                value: ""
+            this.props.createGossip(gossip).then(() => {
+                this.setState({
+                    value: ""
+                })
+                window.location.reload()
             })
         }
     }
@@ -48,7 +50,7 @@ const mapDispatchToProps = dispatch => {
     const { gossipActions } = actions
     return {
         createGossip: (text) => {
-            dispatch(gossipActions.createGossip(text))
+            return dispatch(gossipActions.createGossip(text))
         }
     }
 }
