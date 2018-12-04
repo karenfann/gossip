@@ -12,9 +12,9 @@ class CommentSection extends React.Component {
     }
 
     render() {
-        let comments = this.state.displayedComments.map(text => {
+        let comments = this.state.displayedComments.map((text, idx) => {
             return (
-                <p className="post-comment">
+                <p className="post-comment" key={idx+this.props.docId}>
                     {text}
                 </p>
             )
