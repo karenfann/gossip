@@ -13,8 +13,8 @@ class Post extends React.Component {
         this.state = {
             showComments: false,
             reacted: false,
-            positive_reacts: this.props.gossip.positive_reacts,
-            negative_reacts: this.props.gossip.negative_reacts
+            positive_reacts: this.props.gossip.data().positive_reacts,
+            negative_reacts: this.props.gossip.data().negative_reacts
         }
         this.toggleComments = this.toggleComments.bind(this)
         this.handleReact = this.handleReact.bind(this)
@@ -45,7 +45,7 @@ class Post extends React.Component {
             comments, 
             timestamp, 
             location
-        } = this.props.gossip
+        } = this.props.gossip.data()
         const {
             positive_reacts, 
             negative_reacts

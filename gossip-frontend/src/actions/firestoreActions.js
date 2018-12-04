@@ -35,7 +35,7 @@ export const getGossips = (userLocation, radius=2, timeLimit=24) => {
             const { location } = data
             const distance = computeRadius(userLocation.latitude, userLocation.longitude, location.latitude, location.longitude)
             if (distance <= radius) {
-                acc.push(doc.data())
+                acc.push(doc)
             }
 
             return acc
