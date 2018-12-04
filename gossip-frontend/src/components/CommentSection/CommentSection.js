@@ -9,13 +9,6 @@ class CommentSection extends React.Component {
         this.state = {
             displayedComments: this.props.comments
         }
-        this.handleNewComment = this.handleNewComment.bind(this);
-    }
-
-    handleNewComment(comment) {
-        this.setState(prevState => ({
-            displayedComments: prevState.displayedComments.concat(comment)
-        }))
     }
 
     render() {
@@ -29,7 +22,7 @@ class CommentSection extends React.Component {
         return (
             <div className="post-comment-section">
                 <div className="post-comments">{comments}</div>
-                <CommentInput docId={this.props.docId} handleNewComment={this.handleNewComment}/>
+                <CommentInput docId={this.props.docId}/>
             </div>
         )
     }

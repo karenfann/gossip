@@ -21,7 +21,7 @@ class PostSection extends React.Component {
         }
 
         const gossips = this.props.gossips.sort(compareFunction).map(gossip => 
-            <Post key={gossip.data().timestamp.seconds} gossip={gossip} userLocation={this.props.userLocation}/>
+            <Post key={gossip.data().timestamp} gossip={gossip} userLocation={this.props.userLocation}/>
         )
 
         return (
