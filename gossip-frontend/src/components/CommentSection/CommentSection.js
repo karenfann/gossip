@@ -11,10 +11,16 @@ class CommentSection extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        if (nextProps.comments !== this.props.comments) {
+            this.setState({ displayedComments: nextProps.comments })
+        }
+    } 
+
     render() {
-        let comments = this.state.displayedComments.map(text => {
+        let comments = this.state.displayedComments.map((text, index) => {
             return (
-                <p className="post-comment">
+                <p className="post-comment" key={index + text}>
                     {text}
                 </p>
             )
