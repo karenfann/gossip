@@ -80,6 +80,8 @@ export const postComment = (postId, commentText) => {
 
         return postRef.update({
             comments: updatedComments
+        }).then(() => {
+            return postRef.get()
         })
     })
 }

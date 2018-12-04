@@ -73,8 +73,11 @@ const Gossip = (state=initialState, action) => {
                 }
             }
         case POST_COMMENT_SUCCESS:
+            const filtered = state.gossip.filter(g => g.id !== action.gossip.id)
+            filtered.push(action.gossip)
+
             return {
-                ...state,
+                gossip: filtered,
                 _internal: {
                     loading: false,
                     error: false

@@ -21,7 +21,7 @@ const createGossip = text => {
             const newData = await newGossip.get()
             dispatch({
                 type: POST_GOSSIP_SUCCESS,
-                gossip: newData.data()
+                gossip: newData
             })
         } catch (err) {
             dispatch({
@@ -63,9 +63,11 @@ const postCommentOnPost = (postId, commentText) => {
             type: POST_COMMENT_START
         })
         try {
-            await postComment(postId, commentText)
+            const gossipPromise = await postComment(postId, commentText)
+            const gossipData = await gossipPromise
             dispatch({
-                type: POST_COMMENT_SUCCESS
+                type: POST_COMMENT_SUCCESS,
+                gossip: gossipData
             })
         } catch (err) {
             dispatch({
