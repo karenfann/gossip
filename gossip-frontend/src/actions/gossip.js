@@ -17,9 +17,11 @@ const createGossip = text => {
                 throw new Error('User location is not set')
             }
 
-            await postGossip(text, User.location)
+            const newGossip = await postGossip(text, User.location)
+            const newData = await newGossip.get()
             dispatch({
-                type: POST_GOSSIP_SUCCESS
+                type: POST_GOSSIP_SUCCESS,
+                gossip: newData.data()
             })
         } catch (err) {
             dispatch({

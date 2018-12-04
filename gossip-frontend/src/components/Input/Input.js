@@ -24,11 +24,9 @@ class Input extends React.Component {
     handleClick = () => {
         let gossip = this.state.value.trim()
         if (gossip.length) {
-            this.props.createGossip(gossip).then(() => {
-                this.setState({
-                    value: ""
-                })
-                window.location.reload()
+            this.props.createGossip(gossip)
+            this.setState({
+                value: ""
             })
         }
     }

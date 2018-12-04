@@ -32,7 +32,6 @@ export const getGossips = (userLocation, radius=2, timeLimit=24) => {
     return query.get().then(querySnapshot => {
         return querySnapshot.docs.reduce((acc, doc) => {
             const data = doc.data()
-            console.log(data.timestamp)
             const { location } = data
             const distance = computeRadius(userLocation.latitude, userLocation.longitude, location.latitude, location.longitude)
             if (distance <= radius) {

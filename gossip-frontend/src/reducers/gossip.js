@@ -25,7 +25,7 @@ const Gossip = (state=initialState, action) => {
             }
         case POST_GOSSIP_SUCCESS:
             return {
-                ...state,
+                gossip: [...state.gossip, action.gossip],
                 _internal: {
                     loading: false,
                     error: false
